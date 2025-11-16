@@ -1,0 +1,39 @@
+.swiper-slide,
+.category-slide {
+  width: auto !important;
+  flex: 0 0 auto !important;
+}
+
+.category-btn {
+  white-space: nowrap;
+  display: inline-flex;
+  padding: 0 5px;
+  height: auto;
+  align-items: center;
+  --background: rgba(13, 116, 218, 0.151);  
+  --color: rgba(104, 104, 105, 0.7);
+  text-transform: none !important;
+  
+  --box-shadow: none !important;
+}
+/* Seleccionado */
+.category-btn.selected {
+  --background: rgb(66, 156, 247);
+  /* azul suave */
+  --color: #fdfdfd;
+}
+.menu-button{
+  --background: rgba(255, 255, 255, 0.151);  
+  --color: rgba(104, 104, 105, 0.7);
+  --box-shadow: none !important;
+}
+
+ion-fab-button {
+  --background: rgb(66, 156, 247);  
+  --border-radius: 15px;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --color: black;
+}
+
+
+

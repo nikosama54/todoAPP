@@ -1,0 +1,62 @@
+.task-card {
+  padding: 6px;
+  border-radius: 14px;
+  margin: 5px 2px;
+  background: var(--ion-background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+}
+
+.task-card.completed {
+  opacity: 0.6;
+  pointer-events: auto;
+  
+}
+
+.task-card.completed .task-title,
+.task-card.completed .task-desc {
+  text-decoration: line-through;
+}
+
+.task-row {
+  display: flex;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ion-text-color);
+}
+
+.info p {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.category {
+  background: var(--primary, #1e90ff);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #fff;
+}
+
+ion-checkbox.custom-checkbox {
+  --checkbox-background-checked: #4a90e2;
+  /* elimina el fondo blanco */
+  --checkbox-background: transparent;
+  /* fondo cuando está vacío */
+  --checkbox-border-color: #000;
+  /* color del borde */
+  --checkbox-border-color-checked: #4a90e2;
+  /* borde al estar marcado */
+  --checkmark-color: #4a90e2;
+  /* color del icono del check */
+  --size: 28px;
+  --border-radius: 16px;
+  margin-top: 8%;
+  /* tamaño del checkbox */
+}

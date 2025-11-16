@@ -1,3 +1,17 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
+<ion-app>  
+  <ion-content class="ion-padding">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>  
+  <ion-footer>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="library">
+        <ion-icon name="library"></ion-icon>
+        Historial
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon name="search"></ion-icon>
+        Perfil
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-footer>
 </ion-app>
