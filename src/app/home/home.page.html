@@ -1,20 +1,77 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+    <div style="display: flex; margin: 10px 10px 0px 8px;">
+        <div style="width: 85%; padding-top: 4px;">
+            <swiper-container slides-per-view="auto">
+                @for (category of categorys; track category.id) {
+                <swiper-slide class="category-slide">
+                    <ion-button size="small" shape="round" class="category-btn"
+                        [class.selected]="selectedCategoryId === category.id" (click)="selectCategory(category)">
+                        {{ category.name }}
+                    </ion-button>
+                </swiper-slide>
+                }
+            </swiper-container>
+        </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <ion-button class="menu-button">
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </ion-button>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <!-- boton para agregar tarea -->
+    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 10%;" expand="block" (click)="openNewTaskModal()">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div class="home-wrapper">
+        <h2 class="title">Mis tareas</h2>
+        <!-- Acordeones -->
+        <ion-accordion-group [multiple]="true" value="first">
+            <!-- TAREAS POR HACER -->
+            <ion-accordion value="first">
+                <ion-item slot="header">
+                    <ion-label>Tareas por hacer</ion-label>
+                </ion-item>
+                <div class="section-content" slot="content">
+                    @if (pendingTasks().length === 0) {
+                    <p class="empty-message">Aún no hay tareas creadas.</p>
+                    } @else {
+                    @for (task of pendingTasks(); track task.id) {
+                    <app-task-card [task]="task" (edit)="editTask($event)" (complete)="updateTask($event)">
+                    </app-task-card>
+                    }
+                    }
+                </div>
+            </ion-accordion>
+
+            <!-- TAREAS COMPLETADAS -->
+            <ion-accordion value="second">
+                <ion-item slot="header">
+                    <ion-label>Tareas completadas</ion-label>
+                </ion-item>
+
+                <div class="section-content" slot="content">
+                    @if (completedTasks().length === 0) {
+                    <p class="empty-message">No hay tareas completadas aún.</p>
+                    } @else {
+
+                    <!-- Botón de borrar completadas (solo si hay) -->
+                    <ion-button color="danger" fill="clear" size="small" (click)="clearCompleted()">
+                        <ion-icon name="trash" slot="start"></ion-icon>
+                        Eliminar todas las completadas
+                    </ion-button>
+
+                    @for (task of completedTasks(); track task.id) {
+                    <app-task-card [task]="task" (complete)="updateTask($event)">
+                    </app-task-card>
+                    }
+                    }
+                </div>
+
+            </ion-accordion>
+
+        </ion-accordion-group>
+    </div>
 </ion-content>

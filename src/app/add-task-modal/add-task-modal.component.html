@@ -1,0 +1,43 @@
+<ion-header class="modal-header">
+  <ion-toolbar>
+    <ion-title>{{ task ? 'Editar tarea' : 'Nueva tarea' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" class="close-btn" (click)="close()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-body">
+
+  <div class="form-container">
+
+    <ion-item class="input-item">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea rows="4" [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label>Categoría</ion-label>
+      <ion-select [(ngModel)]="categoryId">
+        @for(c of categories;track c.name ){
+        <ion-select-option>
+          {{ c.name }}
+        </ion-select-option>
+        }        
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" class="save-btn" (click)="saveTask()">
+      {{ task ? 'Actualizar tarea' : 'Guardar tarea' }}
+    </ion-button>
+
+  </div>
+
+</ion-content>
