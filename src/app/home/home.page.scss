@@ -27,14 +27,12 @@
   align-items: center;
   --background: rgba(13, 116, 218, 0.151);  
   --color: rgba(104, 104, 105, 0.7);
-  text-transform: none !important;
-  
+  text-transform: none !important;  
   --box-shadow: none !important;
 }
 /* Seleccionado */
 .category-btn.selected {
   --background: rgb(66, 156, 247);
-  /* azul suave */
   --color: #fdfdfd;
 }
 .menu-button{
@@ -80,4 +78,7 @@ ion-accordion ion-item {
 .section-content {
   padding: 12px 16px;
   background: white;
+}
+.btn-delete-cTask{
+  padding-right: 22px;
 }

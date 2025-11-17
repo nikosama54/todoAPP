@@ -10,7 +10,7 @@
 .task-card.completed {
   opacity: 0.6;
   pointer-events: auto;
-  
+
 }
 
 .task-card.completed .task-title,
@@ -31,7 +31,7 @@
 }
 
 .info p {
-  margin: 4px 0;
+  margin: 1px 0px 4px 0px;
   font-size: 0.8rem;
   opacity: 0.8;
 }
@@ -46,17 +46,11 @@
 
 ion-checkbox.custom-checkbox {
   --checkbox-background-checked: #4a90e2;
-  /* elimina el fondo blanco */
   --checkbox-background: transparent;
-  /* fondo cuando está vacío */
   --checkbox-border-color: #000;
-  /* color del borde */
   --checkbox-border-color-checked: #4a90e2;
-  /* borde al estar marcado */
   --checkmark-color: #4a90e2;
-  /* color del icono del check */
   --size: 28px;
   --border-radius: 16px;
-  margin-top: 8%;
-  /* tamaño del checkbox */
+    align-self: center;
 }
