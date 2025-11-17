@@ -1,8 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonHeader, IonToolbar, IonTitle, IonButton, IonContent,
+  ToastController, IonIcon,
+  IonItem, IonLabel, IonInput, IonTextarea,
+  IonList, IonSelect, IonSelectOption, IonButtons
+} from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { closeOutline,sendOutline,saveOutline } from 'ionicons/icons';
 
 export interface Task {
   id: number;
@@ -15,7 +22,11 @@ export interface Task {
   selector: 'app-add-task-modal',
   templateUrl: './add-task-modal.component.html',
   styleUrls: ['./add-task-modal.component.scss'],
-  imports: [IonicModule, FormsModule, CommonModule]
+  imports: [IonHeader, IonToolbar,
+    IonTitle, IonButton, IonContent,
+    FormsModule, CommonModule, IonIcon,
+    IonInput, IonTextarea,
+    IonSelect, IonSelectOption]
 })
 export class AddTaskModalComponent implements OnInit {
   @Input() task: Task | null = null;
@@ -30,18 +41,26 @@ export class AddTaskModalComponent implements OnInit {
     { id: 3, name: 'Medicina' },
     { id: 4, name: 'Trabajo' }
   ];
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private toastController: ToastController) {
+    addIcons({ closeOutline,sendOutline,saveOutline });
+  }
   ngOnInit() {
     if (this.task) {
-      // Si estamos editando, rellenamos los campos
       this.name = this.task.name;
       this.description = this.task.description;
       this.categoryId = this.task.categoryId;
     }
   }
 
-  saveTask() {
+  async saveTask() {
     if (!this.name.trim()) {
+      const toast = await this.toastController.create({
+        message: 'Porfavor ingrese un nombre para la tarea',
+        duration: 2000,
+        position: 'middle',
+      });
+
+      await toast.present();
       console.log('ingrese nombre porfavor')
       return
     };

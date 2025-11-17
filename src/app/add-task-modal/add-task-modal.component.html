@@ -1,43 +1,46 @@
 <ion-header class="modal-header">
   <ion-toolbar>
     <ion-title>{{ task ? 'Editar tarea' : 'Nueva tarea' }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" class="close-btn" (click)="close()">
-        Cerrar
-      </ion-button>
-    </ion-buttons>
+    <ion-button class="closeBtn" slot="end" size="small" (click)="close()" shape="round">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="modal-body">
-
   <div class="form-container">
-
-    <ion-item class="input-item">
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="name"></ion-input>
-    </ion-item>
-
-    <ion-item class="input-item">
-      <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea rows="4" [(ngModel)]="description"></ion-textarea>
-    </ion-item>
-
-    <ion-item class="input-item">
-      <ion-label>Categoría</ion-label>
-      <ion-select [(ngModel)]="categoryId">
-        @for(c of categories;track c.name ){
-        <ion-select-option>
+    <div class="inputs-containers">
+      <ion-input label="Nombre Tarea" [(ngModel)]="name" labelPlacement="floating" placeholder="Escribe Aqui"
+        [counter]="true" maxlength="50"></ion-input>
+    </div>
+    <div class="inputs-containers">
+      <ion-textarea label="Descripcion" placeholder="Escribe Aqui" labelPlacement="floating" rows="4"
+        [(ngModel)]="description" [counter]="true" maxlength="122"></ion-textarea>
+    </div>
+    <div class="inputs-containers">
+      <ion-select justify="start" [(ngModel)]="categoryId" placeholder="Categoria" label="Selecciona una" interface="modal">
+        @for(c of categories;track c.id ){
+        <ion-select-option [value]="c.name">
           {{ c.name }}
         </ion-select-option>
-        }        
+        }
       </ion-select>
-    </ion-item>
+      @if (task) {
+      <div class="containerBtns">
+        <ion-button class="sendBtn" shape="round" size="large" (click)="saveTask()">
+          <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+        </ion-button>
+      </div>
+      } @else {
+      <div class="containerBtns">
+        <ion-button class="sendBtn " shape="round" size="large" (click)="saveTask()">
+          <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+        </ion-button>
+      </div>
+      }
+    </div>
 
-    <ion-button expand="block" class="save-btn" (click)="saveTask()">
-      {{ task ? 'Actualizar tarea' : 'Guardar tarea' }}
-    </ion-button>
+
 
   </div>
-
 </ion-content>

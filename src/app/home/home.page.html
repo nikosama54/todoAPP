@@ -57,8 +57,8 @@
                     <p class="empty-message">No hay tareas completadas aún.</p>
                     } @else {
 
-                    <!-- Botón de borrar completadas (solo si hay) -->
-                    <ion-button color="danger" fill="clear" size="small" (click)="clearCompleted()">
+                    <!-- Botón de ELIMINAR completadas -->
+                    <ion-button class="btn-delete-cTask" color="danger" fill="clear" size="small" (click)="clearCompleted()">
                         <ion-icon name="trash" slot="start"></ion-icon>
                         Eliminar todas las completadas
                     </ion-button>

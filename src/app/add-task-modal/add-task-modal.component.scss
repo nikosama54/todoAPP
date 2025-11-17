@@ -1,42 +1,65 @@
 .modal-header {
-  --background: #ffffff;
-  text-align: center;
+    --background: #ffffff;
+    text-align: center;
+    padding-left: 20px;
 
-  ion-title {
-    font-size: 20px;
-    font-weight: 600;
-  }
+    ion-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
 
-  .close-btn {
-    font-size: 14px;
-    color: var(--ion-color-medium);
-  }
+    .close-btn {
+        font-size: 14px;
+        color: var(--ion-color-medium);
+    }
 }
 
 .modal-body {
-  --background: #f6f7fb;
-  padding: 20px;
+    --background: #f6f7fb;
+    padding: 20px;
 }
 
 .form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 10px;
 }
 
 .input-item {
-  border-radius: 14px;
-  --background: #fff;
-  --border-radius: 14px;
-  margin-bottom: 4px;
-  box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    border-radius: 14px;
+    --background: #fff;
+    --border-radius: 14px;
+    margin-bottom: 4px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .save-btn {
-  margin-top: 10px;
-  --border-radius: 12px;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
+    margin-top: 10px;
+    --border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.inputs-containers {
+    padding: 0px 15px;
+    display: flex;
+}
+
+.closeBtn {
+    --background: rgba(13, 116, 218, 0.151);
+    --color: rgba(104, 104, 105, 0.7);
+}
+
+.sendBtn {
+    --background: rgb(66, 156, 247);
+    --color: #fdfdfd;    
+    
+}
+.containerBtns{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
 }
