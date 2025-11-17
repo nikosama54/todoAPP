@@ -57,7 +57,7 @@ export class AddTaskModalComponent implements OnInit {
       const toast = await this.toastController.create({
         message: 'Porfavor ingrese un nombre para la tarea',
         duration: 2000,
-        position: 'middle',
+        position: 'top',
       });
 
       await toast.present();
