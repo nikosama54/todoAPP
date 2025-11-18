@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { register } from 'swiper/element/bundle';
-import { menu, ellipsisVerticalOutline, library, search } from 'ionicons/icons';
+import { menu, ellipsisVerticalOutline, library, search, personOutline } from 'ionicons/icons';
 import { FirebaseConfigService } from './services/remote-config.service';
 import { IonApp, IonRouterOutlet, IonContent, IonFooter, IonTabBar, IonTabButton, IonIcon, } from '@ionic/angular/standalone';
 import { NavigationEnd, Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class AppComponent {
   currentUrl = signal('');
 
   constructor(public configServer: FirebaseConfigService, public router: Router) {
-    addIcons({ menu, ellipsisVerticalOutline, library, search });
+    addIcons({ menu, ellipsisVerticalOutline, library, search, personOutline });
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))

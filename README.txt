@@ -17,8 +17,6 @@ Funcionalidades
 - Optimización de rendimiento usando Angular Signals y computed.
 ---
 
-Instalación y Ejecución
-
 1. Clona el repositorio:
 
 git clone https://github.com/nikosama54/todoAPP
@@ -35,6 +33,12 @@ ionic serve
 
 4. Para compilar la aplicación en Android:
 
+⚠️ Nota: En la prueba se mencionaba Cordova, pero he utilizado Capacitor, 
+que es el runtime oficial moderno de Ionic. Esto permite compilar la aplicación de forma 
+nativa para Android e iOS, manteniendo compatibilidad total con plugins y funcionalidades esperadas.
+
+Instalación y Ejecución.
+
 npm install @capacitor/android
 ionic build
 ionic capacitor add android
@@ -45,13 +49,12 @@ ionic capacitor open android
 para ios es el mismo proceso-
 ⚠️ iOS: La generación de IPA requiere Xcode en macOS. Actualmente no se incluye un IPA debido a que el desarrollo
 se realizó en Windows. Se pueden proporcionar instrucciones para generar la versión iOS si es necesario.
-
 ---
 
 Archivos de entrega
 
-- APK de Android: NicoOnRoad_Android.apk
-- Código fuente: [Enlace al repositorio GitHub]
+- APK de Android: todoAPP.apk
+- Código fuente: https://github.com/nikosama54/todoAPP
 
 ---
 
@@ -76,8 +79,7 @@ Consideraciones
 Próximos pasos
 
 - Implementar tareas olvidadas y su contador histórico.
-- Mejorar diseño visual y agregar animaciones o transiciones en Ionic.
-- Implementar pruebas unitarias y de integración para asegurar la calidad del código.
-- mover libremente el orden de las categorias
+- Mejorar diseño visual y agregar animaciones o transiciones en Ionic, esto va de la mano con Mejorar los temas de temporada.
+- funcion para mover libremente el orden de las categorias a la hora de crearlas o editarlas.
 
 ---
