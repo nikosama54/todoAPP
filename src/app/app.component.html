@@ -4,18 +4,20 @@
   </ion-content>
   @if (configServer.showBottomMenu()) {
   <ion-footer>
+
+
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="library">
+      <ion-tab-button (click)="goTo('/home')" [class.active-btn]="currentUrl() === '/home'">
         <ion-icon name="library"></ion-icon>
         Tareas
       </ion-tab-button>
-      <ion-tab-button tab="search">
+      <ion-tab-button (click)="goTo('/profile')" [class.active-btn]="currentUrl() === '/profile'">
         <ion-icon name="search"></ion-icon>
         Perfil
       </ion-tab-button>
     </ion-tab-bar>
   </ion-footer>
   }@else {
-    <p>footer en contruccion</p>
+  <p>footer en contruccion</p>
   }
 </ion-app>

@@ -1,3 +1,14 @@
+//Este aplicativo en un to do list con opcion para organizar y filtrar por categorias
+mas un footer conectado a firebase que se muestra
+
+//pasos para instalar el proyecto y correrlo en local
+
+npm install @angular/cli
+npm install -g @ionic/cli
+npm install --legacy-peer-deps
+npm install swiper
+
+
 //pasos para generar la build para Android ---------------------------------------
 # 1️⃣ Instalar la plataforma Android de Capacitor
 npm install @capacitor/android
@@ -6,7 +17,7 @@ npm install @capacitor/android
 npx cap init
 
 # 3️⃣ (Opcional) Borrar carpetas previas si se crearon mal
-# delete the android folder y delete the www folder
+# Borrar la carpeta android y borrar la carpeta www
 
 # 4️⃣ Agregar la plataforma iOS a tu proyecto
 ionic capacitor add android
@@ -29,7 +40,7 @@ npm install @capacitor/ios
 npx cap init
 
 # 3️⃣ (Opcional) Borrar carpetas previas si se crearon mal
-# delete the ios folder y delete the www folder
+# Borrar la carpeta android y borrar la carpeta www
 
 # 4️⃣ Agregar la plataforma iOS a tu proyecto
 ionic capacitor add ios

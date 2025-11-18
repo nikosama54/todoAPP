@@ -1,0 +1,50 @@
+<ion-header class="modal-header">
+  <ion-toolbar  class="headerProfile">
+    <ion-title>Perfil</ion-title>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding profile-page">
+
+  <!-- Avatar y nombre -->
+  <div class="profile-header">
+    <ion-avatar>
+      <img [src]="user.avatar" alt="Avatar" />
+    </ion-avatar>
+    <h2>{{ user.name }}</h2>
+    <p>{{ user.email }}</p>
+  </div>
+
+  <!-- Estadísticas -->
+  <ion-grid class="profile-stats">
+    <ion-row>
+      <ion-col class="stat">
+        <h3>{{ user.taskPending }}</h3>
+        <p>Tareas Pendientes</p>
+      </ion-col>
+      <ion-col class="stat">
+        <h3>{{ user.taskComplete }}</h3>
+        <p>Tareas Completadas</p>
+      </ion-col>
+      <ion-col class="stat">
+        <h3>{{ user.taskForgot }}</h3>
+        <p>Tareas Olvidadas</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Botones de acción -->
+  <ion-button expand="block" fill="solid" color="secondary" class="action-btn">
+    Editar Perfil
+  </ion-button>
+  <!-- Sección adicional -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Sobre mí</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Hola, soy Nicolás y me encanta viajar en moto por Colombia. Aquí comparto mis rutas, aventuras y experiencias.
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

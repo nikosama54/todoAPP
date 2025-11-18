@@ -11,22 +11,25 @@ import { Task } from '../models/task.model';
 import { CategoriService } from '../services/categori.service';
 import { CategoryManagerModalComponent } from '../category-manager-modal/category-manager-modal.component';
 import { IonButton, IonContent, IonPopover,IonList,IonItem,IonFab,IonIcon,IonAccordionGroup,IonAccordion,
-  IonLabel,IonFabButton} from '@ionic/angular/standalone';
+  IonLabel,IonFabButton, IonSearchbar} from '@ionic/angular/standalone';
 import { FirebaseConfigService } from '../services/remote-config.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [TaskCardComponent,IonButton, IonContent,IonPopover,IonList,IonItem,IonFab,IonIcon,IonAccordionGroup,IonAccordion,IonLabel,IonFabButton],
+  imports: [TaskCardComponent,IonButton, 
+    IonContent,IonPopover,IonList,IonItem,IonFab,
+    IonIcon,IonAccordionGroup,IonAccordion,IonLabel,
+    IonFabButton,IonSearchbar],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {
-
-  selectedCategoryId = signal<number | null>(null);
-
-  // ← ahora categories es un SIGNAL real
+  searchText = signal('');
+  selectedCategoryId = signal<number | null>(null);  
+  filterMode = signal<'category' | 'search'>('category');
   categories;
+  ActiveSearch:boolean=false
 
   constructor(
     private modalCtrl: ModalController,
@@ -34,21 +37,35 @@ export class HomePage {
     categoriService: CategoriService,
     public configService: FirebaseConfigService
   ) {
-    addIcons({ menu, ellipsisVerticalOutline, add, trash });
-
-    // Guardamos el signal, NO su valor
+    addIcons({ menu, ellipsisVerticalOutline, add, trash });   
     this.categories = categoriService.categories;
   }
-
   /* ======================
       FILTROS DE TAREAS
   ====================== */
 
-  filteredTasks = computed(() => {
-    const id = this.selectedCategoryId();
-    if (id === null) return this.taskService.tasks();
-    return this.taskService.tasks().filter(t => t.categoryId === id);
-  });
+ filteredTasks = computed(() => {
+  const mode = this.filterMode();
+  const id = this.selectedCategoryId();
+  const search = this.searchText().toLowerCase();
+
+  let tasks = this.taskService.tasks();
+
+  if (mode === 'category') {
+    if (id !== null) {
+      tasks = tasks.filter(t => t.categoryId === id);
+    }
+  } else if (mode === 'search') {
+    if (search) {
+      tasks = tasks.filter(t => 
+      t.name.toLowerCase().includes(search) ||
+      t.description.toLowerCase().includes(search)
+    );
+    }
+  }
+
+  return tasks;
+});
 
   pendingTasks = computed(() =>
     this.filteredTasks().filter(t => !t.completed)
@@ -106,8 +123,8 @@ export class HomePage {
     const modal = await this.modalCtrl.create({
       component: CategoryManagerModalComponent,
     });
-    
-
     await modal.present();
   }
+
+   
 }

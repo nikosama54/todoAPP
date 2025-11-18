@@ -1,5 +1,10 @@
 <ion-content>
-    <div class="topMenu">        
+    <div class="topMenu">
+        @if (filterMode() === 'search') {
+        <ion-searchbar placeholder="Buscar tareas" [value]="searchText()"
+            (ionInput)="searchText.set($any($event).detail.value)">
+        </ion-searchbar>
+        } @else {
         <div class="containerFilters">
             <swiper-container slides-per-view="auto">
                 <!-- Botón fijo "Todas" -->
@@ -21,14 +26,23 @@
                 }
             </swiper-container>
         </div>
+        }
         <ion-button id="popover-button" class="menu-button">
             <ion-popover trigger="popover-button" [dismissOnSelect]="true">
                 <ng-template>
                     <ion-content>
                         <ion-list>
-                            <ion-item [button]="true" [detail]="false">Buscar</ion-item>
+                            @if (filterMode() === 'search') {
+                            <ion-item [button]="true" [detail]="false"
+                                (click)="filterMode.set('category')">Categorias</ion-item>
+
+                            }@else {
+                            <ion-item [button]="true" [detail]="false"
+                                (click)="filterMode.set('search')">Buscar</ion-item>
                             <ion-item [button]="true" [detail]="false" (click)="openCategoryManager()">Editar
                                 Categorias</ion-item>
+                            }
+
                         </ion-list>
                     </ion-content>
                 </ng-template>

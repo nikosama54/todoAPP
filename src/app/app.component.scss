@@ -31,5 +31,8 @@ ion-fab-button {
   --color: black;
 }
 
-
-
+.active-btn {
+  --background: rgb(66, 156, 247, 0.5);  
+  border-radius: 30px;  
+  --color: rgb(58, 56, 56); 
+}
