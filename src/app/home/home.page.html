@@ -1,39 +1,60 @@
 <ion-content>
-    <div style="display: flex; margin: 10px 10px 0px 8px;">
-        <div style="width: 85%; padding-top: 4px;">
+    <div class="topMenu">
+        <div class="containerFilters">
             <swiper-container slides-per-view="auto">
-                @for (category of categorys; track category.id) {
+                <!-- Botón fijo "Todas" -->
                 <swiper-slide class="category-slide">
                     <ion-button size="small" shape="round" class="category-btn"
-                        [class.selected]="selectedCategoryId === category.id" (click)="selectCategory(category)">
+                        [class.selected]="selectedCategoryId() === null" (click)="selectCategory(null)">
+                        Todas
+                    </ion-button>
+                </swiper-slide>
+                <!-- Botones dinámicos -->
+
+                @for (category of categories(); track category.id) {
+                <swiper-slide class="category-slide">
+                    <ion-button size="small" shape="round" class="category-btn"
+                        [class.selected]="selectedCategoryId() === category.id" (click)="selectCategory(category)">
                         {{ category.name }}
                     </ion-button>
                 </swiper-slide>
                 }
             </swiper-container>
         </div>
-
-        <ion-button class="menu-button">
+        <ion-button id="popover-button" class="menu-button">
+            <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+                <ng-template>
+                    <ion-content>
+                        <ion-list>
+                            <ion-item [button]="true" [detail]="false">Buscar</ion-item>
+                            <ion-item [button]="true" [detail]="false" (click)="openCategoryManager()">Editar
+                                Categorias</ion-item>
+                        </ion-list>
+                    </ion-content>
+                </ng-template>
+            </ion-popover>
             <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </ion-button>
     </div>
 
-    <!-- boton para agregar tarea -->
-    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 10%;" expand="block" (click)="openNewTaskModal()">
-        <ion-fab-button>
+    <!-- FAB agregar task -->
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="openAddTaskModal()">
+        <ion-fab-button class="pulse">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
     <div class="home-wrapper">
         <h2 class="title">Mis tareas</h2>
-        <!-- Acordeones -->
+
         <ion-accordion-group [multiple]="true" value="first">
-            <!-- TAREAS POR HACER -->
+
+            <!-- PENDIENTES -->
             <ion-accordion value="first">
                 <ion-item slot="header">
                     <ion-label>Tareas por hacer</ion-label>
                 </ion-item>
+
                 <div class="section-content" slot="content">
                     @if (pendingTasks().length === 0) {
                     <p class="empty-message">Aún no hay tareas creadas.</p>
@@ -46,19 +67,20 @@
                 </div>
             </ion-accordion>
 
-            <!-- TAREAS COMPLETADAS -->
+            <!-- COMPLETADAS -->
             <ion-accordion value="second">
                 <ion-item slot="header">
                     <ion-label>Tareas completadas</ion-label>
                 </ion-item>
 
                 <div class="section-content" slot="content">
+
                     @if (completedTasks().length === 0) {
                     <p class="empty-message">No hay tareas completadas aún.</p>
                     } @else {
 
-                    <!-- Botón de ELIMINAR completadas -->
-                    <ion-button class="btn-delete-cTask" color="danger" fill="clear" size="small" (click)="clearCompleted()">
+                    <ion-button class="btn-delete-cTask" color="danger" fill="clear" size="small"
+                        (click)="clearCompleted()">
                         <ion-icon name="trash" slot="start"></ion-icon>
                         Eliminar todas las completadas
                     </ion-button>

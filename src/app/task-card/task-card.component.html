@@ -6,7 +6,12 @@
     <div class="info">
       <h3>{{ task.name }}</h3>
       <p>{{ task.description }}</p>
-      <span class="category">{{ task.categoryId }}</span>
+      <span class="category">@if(task.categoryName != ''){
+        {{ task.categoryName }}
+        }@else{
+          Sin Categoria
+        }
+        </span>
     </div>
   </ion-card>
 </div>

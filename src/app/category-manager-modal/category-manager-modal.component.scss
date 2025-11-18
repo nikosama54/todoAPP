@@ -1,0 +1,27 @@
+.modal-header {
+    --background: #ffffff;
+    text-align: center;
+    padding-left: 20px;
+
+    ion-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .close-btn {
+        font-size: 14px;
+        color: var(--ion-color-medium);
+    }
+}
+
+.closeBt {
+    --background: rgba(13, 116, 218, 0.151) !important;
+    --color: rgba(104, 104, 105, 0.7) !important;
+}
+
+.deleteIcon{
+    --color: rgba(250, 29, 29, 0.877);
+}
+.btnCreate{
+    --background: rgb(66, 156, 247);
+}

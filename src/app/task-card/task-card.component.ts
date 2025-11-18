@@ -1,13 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IonCard, IonCheckbox } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
-export interface Task {
-  id: number;
-  name: string;
-  description: string;
-  categoryId: number;
-  completed: boolean;
-}
+import { Task } from '../models/task.model';
+
 @Component({
   selector: 'app-task-card',
   templateUrl: './task-card.component.html',
@@ -22,7 +17,7 @@ export class TaskCardComponent {
 
   onEdit() {
     if (this.task.completed) return;
-    this.edit.emit(this.task);
+    this.edit.emit(this.task);    
   }
 
   toggleComplete(ev: any) {

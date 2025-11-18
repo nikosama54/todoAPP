@@ -45,6 +45,7 @@
 .inputs-containers {
     padding: 0px 15px;
     display: flex;
+    justify-content: space-between;
 }
 
 .closeBtn {
@@ -62,4 +63,16 @@
     justify-content: end;
     align-items: center;
     
+}
+
+.category-btn {
+  white-space: nowrap;
+  display: inline-flex;
+  padding: 0 5px;
+  height: auto;
+  align-items: center;
+  --background: rgb(66, 156, 247);
+  --color: #fdfdfd;
+  text-transform: none !important;  
+  --box-shadow: none !important;
 }
