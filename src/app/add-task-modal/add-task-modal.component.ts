@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, effect, Input, OnInit } from '@angular/core';
 import {
   IonHeader, IonToolbar, IonTitle, IonButton, IonContent,
   ToastController, IonIcon,
@@ -25,7 +25,7 @@ import { Task } from '../models/task.model';
     IonTitle, IonButton, IonContent,
     FormsModule, CommonModule, IonIcon,
     IonInput, IonTextarea,
-    IonLabel,IonItem]
+    IonLabel, IonItem]
 })
 export class AddTaskModalComponent implements OnInit {
   @Input() task: Task | null = null;
@@ -33,20 +33,25 @@ export class AddTaskModalComponent implements OnInit {
   name = '';
   description = '';
   categoryId: number | null = null;
-  categoryName:string=''
-  selectedCategoryName = '';
-  
-  constructor(private modalCtrl: ModalController, 
+  categoryName: string = 'Sin categoría'
+  selectedCategoryName = '';  
+  constructor(private modalCtrl: ModalController,
     private toastController: ToastController,
-    private categoryService:CategoriService) {
+    private categoryService: CategoriService) {
     addIcons({ closeOutline, sendOutline, saveOutline });
+
+    effect(() => {
+      if (!this.task) return;
+      const cat = this.categoryService.categories().find(c => c.id === this.task?.categoryId);
+      this.categoryName = cat ? cat.name : 'Sin categoría';
+    });
   }
   ngOnInit() {
     if (this.task) {
       this.name = this.task.name;
       this.description = this.task.description;
       this.categoryId = this.task.categoryId;
-      this.categoryName= this.task.categoryName
+      this.categoryName = this.task.categoryName ?? '';
 
       const c = this.categoryService.categories()
         .find(x => x.id === this.categoryId);
@@ -54,23 +59,31 @@ export class AddTaskModalComponent implements OnInit {
       this.selectedCategoryName = c?.name || '';
     }
   }
-  
+
   async openCategoryManager() {
     const modal = await this.modalCtrl.create({
       component: CategoryManagerModalComponent,
     });
 
     modal.onDidDismiss().then(res => {
+      console.log(res.data, "data")
       if (res.data) {
         this.categoryId = res.data.id;
         this.selectedCategoryName = res.data.name;
-        this.categoryName=res.data.name
+        this.categoryName = res.data.name
+      } else {
+        if (this.task) {
+          this.selectedCategoryName = this.categoryName ?? '';
+
+        }
       }
+
     });
 
     await modal.present();
   }
   async saveTask() {
+    console.log(this.name, "nameee")
     if (!this.name.trim()) {
       const toast = await this.toastController.create({
         message: 'Porfavor ingrese un nombre para la tarea',
@@ -85,7 +98,7 @@ export class AddTaskModalComponent implements OnInit {
       name: this.name,
       description: this.description,
       categoryId: this.categoryId ?? "Sin Categoria",
-      categoryName:this.categoryName,
+      categoryName: this.categoryName,
       id: this.task?.id ?? Date.now()
     };
 
@@ -94,6 +107,6 @@ export class AddTaskModalComponent implements OnInit {
 
   close() {
     this.modalCtrl.dismiss(null);
-  }  
+  }
 
 }

@@ -1,8 +1,8 @@
 export interface Task {
   id: number;
-  name: string;         // nombre de la tarea
+  name: string;
   description: string;
-  categoryId: number | null;
-  categoryName:string;
   completed: boolean;
+  categoryId: number | null;
+  categoryName?: string; // opcional
 }

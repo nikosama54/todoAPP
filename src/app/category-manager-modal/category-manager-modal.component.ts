@@ -40,13 +40,14 @@ export class CategoryManagerModalComponent {
         message: 'Porfavor ingrese nombre de la categoria',
         duration: 2000,
         position: 'top',
-
       });
       await toast.present();
       return
     } else {
       if (this.editingId) {
+        console.log('entra aquii')
         this.categoryService.updateCategory(this.editingId, this.newName);
+
       } else {
         this.categoryService.addCategory(this.newName);
       }
@@ -60,7 +61,7 @@ export class CategoryManagerModalComponent {
     this.categoryService.deleteCategory(id);
   }
 
-  close() {
+  close() {    
     this.modalCtrl.dismiss();
   }
 }

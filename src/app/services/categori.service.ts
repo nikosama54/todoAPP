@@ -13,21 +13,23 @@ export class CategoriService {
     { id: 2, name: "Medicina" },
     { id: 3, name: "Trabajo" }
   ]);
-  constructor(private taskService: TasksService){}
+  constructor(private taskService: TasksService) { }
   addCategory(name: string) {
     const newCategory = { id: Date.now(), name };
     this.categories.update(list => [...list, newCategory]);
   }
 
   updateCategory(id: number, name: string) {
+    
     this.categories.update(list =>
-      list.map(c => c.id === id ? { ...c, name } : c)
-    );
+      list.map(c => (c.id === id ? { ...c, name } : c))
+    );   
+
   }
 
   deleteCategory(id: number) {
-  this.categories.update(list => list.filter(c => c.id !== id));
+    this.categories.update(list => list.filter(c => c.id !== id));
 
-  this.taskService.removeCategoryFromTasks(id);
-}
+    this.taskService.removeCategoryFromTasks(id);
+  }
 }

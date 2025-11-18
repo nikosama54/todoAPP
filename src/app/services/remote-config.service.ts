@@ -24,7 +24,7 @@ export class FirebaseConfigService {
   ) {
     
     const saved = localStorage.getItem('useSeasonTheme');
-    console.log(saved)
+    
     if (saved !== null) {
       this.useSeasonTheme.set(saved === 'true');
     }

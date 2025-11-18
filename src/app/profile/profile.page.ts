@@ -41,15 +41,12 @@ export class ProfilePage implements OnInit {
   user = {
     name: 'Nicolás Alarcón',
     email: 'ni-co123@hotmail.com',
-    avatar: 'https://i.pravatar.cc/150?img=3',
-    taskForgot: 180,
+    avatar: 'https://i.pravatar.cc/150?img=3',    
   };
 
   pendingCount = computed(() =>
     this.taskService.tasks().filter(t => !t.completed).length
   );
   completedCount = this.taskService.completedCounter;
-
-
-
+  
 }

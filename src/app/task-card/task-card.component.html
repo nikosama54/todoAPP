@@ -1,17 +1,21 @@
 <div class="task-row">
-  <ion-checkbox [checked]="task.completed" (click)="$event.stopPropagation()" (ionChange)="toggleComplete($event)"
+  <ion-checkbox 
+    [checked]="task.completed" 
+    (click)="$event.stopPropagation()" 
+    (ionChange)="toggleComplete($event)"
     class="custom-checkbox">
   </ion-checkbox>
-  <ion-card class="task-card" [class.completed]="task.completed" (click)="onEdit()">
+
+  <ion-card 
+    class="task-card" 
+    [class.completed]="task.completed" 
+    (click)="onEdit()">
     <div class="info">
       <h3>{{ task.name }}</h3>
       <p>{{ task.description }}</p>
-      <span class="category">@if(task.categoryName != ''){
-        {{ task.categoryName }}
-        }@else{
-          Sin Categoria
-        }
-        </span>
+      <span class="category">
+        {{ categoryName }}
+      </span>
     </div>
   </ion-card>
 </div>

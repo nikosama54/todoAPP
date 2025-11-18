@@ -75,7 +75,7 @@
                     <p class="empty-message">Aún no hay tareas creadas.</p>
                     } @else {
                     @for (task of pendingTasks(); track task.id) {
-                    <app-task-card [task]="task" (edit)="editTask($event)" (complete)="updateTask($event)">
+                    <app-task-card [task]="task" (edit)="editTask($event)" (complete)="updateTask($event)" >
                     </app-task-card>
                     }
                     }
