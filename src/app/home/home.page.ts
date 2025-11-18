@@ -102,7 +102,6 @@ export class HomePage {
     });
 
     modal.onDidDismiss().then(res => {
-      console.log(res.data, "hooooooooola")
       if (res.data) this.taskService.update(res.data);
     });
 
