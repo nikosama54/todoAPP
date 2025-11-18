@@ -115,3 +115,40 @@ ion-accordion ion-item {
     
   }
 }
+
+/* ❄️ Efecto “congelado” */
+ion-fab-button.frozen {
+  background: #b3d9ff !important; /* azul hielo */
+  box-shadow: 0 0 12px rgba(135, 206, 250, 0.8), 
+              inset 0 0 10px rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transition: 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ❄️ Escarcha animada dentro del botón */
+ion-fab-button.frozen::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%; 
+  background-size: cover;
+  opacity: 0.25;
+  filter: blur(1px);
+  animation: frostMove 6s linear infinite;
+}
+
+/* ❄️ Animación para la escarcha */
+@keyframes frostMove {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(10px, 10px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ❄️ Color del icono en modo freeze */
+ion-fab-button.frozen ion-icon {
+  color: #003366 !important;
+}

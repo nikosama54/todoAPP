@@ -1,55 +1,83 @@
-//Este aplicativo en un to do list con opcion para organizar y filtrar por categorias
-mas un footer conectado a firebase que se muestra
+To-Do App
 
-//pasos para instalar el proyecto y correrlo en local
+Aplicación móvil desarrollada con Ionic y Angular moderno, que permite gestionar tareas, 
+categorizarlas y filtrarlas, con contadores de tareas pendientes y completadas.
+---
+Funcionalidades
 
-npm install @angular/cli
-npm install -g @ionic/cli
+- Crear, editar y eliminar tareas.
+- Marcar tareas como completadas o pendientes.
+- Contadores de tareas:
+  - Pendientes: número de tareas actuales no completadas.
+  - Completadas: incrementa al marcar completada y decrementa al desmarcar; no se afecta al eliminar tareas.
+- Crear, editar y eliminar categorías.
+- Asignar categorías a tareas y filtrar tareas por categoría.
+- Búsqueda de tareas por texto.
+- Integración con Firebase y Remote Config para feature flags cambiando de tema segun la estacion.
+- Optimización de rendimiento usando Angular Signals y computed.
+---
+
+Instalación y Ejecución
+
+1. Clona el repositorio:
+
+git clone https://github.com/nikosama54/todoAPP
+cd todoAPP
+
+2. Instala dependencias:
+
 npm install --legacy-peer-deps
 npm install swiper
 
+3. Ejecuta la aplicación en desarrollo:
 
-//pasos para generar la build para Android ---------------------------------------
-# 1️⃣ Instalar la plataforma Android de Capacitor
+ionic serve
+
+4. Para compilar la aplicación en Android:
+
 npm install @capacitor/android
-
-# 2️⃣ Inicializar Capacitor (solo la primera vez si no hay config)
-npx cap init
-
-# 3️⃣ (Opcional) Borrar carpetas previas si se crearon mal
-# Borrar la carpeta android y borrar la carpeta www
-
-# 4️⃣ Agregar la plataforma iOS a tu proyecto
+ionic build
 ionic capacitor add android
+ionic capacitor open android
 
-# 5️⃣ Construir la app de Ionic
-ionic build
+- Luego desde Android Studio puedes compilar el APK (Build > Build Bundle / APK > Build APK).
 
-# 6️⃣ Sincronizar los cambios de la build a la plataforma
-npx cap sync
+para ios es el mismo proceso-
+⚠️ iOS: La generación de IPA requiere Xcode en macOS. Actualmente no se incluye un IPA debido a que el desarrollo
+se realizó en Windows. Se pueden proporcionar instrucciones para generar la versión iOS si es necesario.
 
-# 7️⃣ Abrir android studio para generar el .apk o ejecutar en simulador/dispositivo
-npx cap open ios
+---
 
-//pasos para generar la build oara IOS -------------------------------------------
+Archivos de entrega
 
-# 1️⃣ Instalar la plataforma iOS de Capacitor
-npm install @capacitor/ios
+- APK de Android: NicoOnRoad_Android.apk
+- Código fuente: [Enlace al repositorio GitHub]
 
-# 2️⃣ Inicializar Capacitor (solo la primera vez si no hay config)
-npx cap init
+---
 
-# 3️⃣ (Opcional) Borrar carpetas previas si se crearon mal
-# Borrar la carpeta android y borrar la carpeta www
+Optimización y buenas prácticas
 
-# 4️⃣ Agregar la plataforma iOS a tu proyecto
-ionic capacitor add ios
+- Uso de Angular Signals y computed para mantener la interfaz reactiva y evitar recálculos innecesarios.
+- Separación clara de responsabilidades: 
+  - TaskService maneja la lógica de negocio y contadores.  
+  - TaskCard es un componente “tonto” que solo emite eventos.
+- Filtros y búsquedas eficientes usando arrays gestionados por signals.
+- Contadores de tareas implementados para reflejar correctamente el historial y el estado actual de cada tarea.
 
-# 5️⃣ Construir la app de Ionic
-ionic build
+---
 
-# 6️⃣ Sincronizar los cambios de la build a la plataforma
-npx cap sync
+Consideraciones
 
-# 7️⃣ Abrir Xcode para generar el .ipa o ejecutar en simulador/dispositivo
-npx cap open ios
+- Los contadores de tareas cumplen las reglas indicadas: no se duplican al marcar/desmarcar tareas y no bajan al eliminar tareas.
+- La aplicación es escalable y fácil de mantener gracias a la arquitectura basada en Angular moderno y separación de responsabilidades.
+
+---
+
+Próximos pasos
+
+- Implementar tareas olvidadas y su contador histórico.
+- Mejorar diseño visual y agregar animaciones o transiciones en Ionic.
+- Implementar pruebas unitarias y de integración para asegurar la calidad del código.
+- mover libremente el orden de las categorias
+
+---

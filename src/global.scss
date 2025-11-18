@@ -50,12 +50,58 @@ body.dark {
   --ion-text-color: #ffffff;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: 'Montserrat', sans-serif;
 }
 
 .closeBtn {
-    --background: rgba(13, 116, 218, 0.151);
-    --color: rgba(104, 104, 105, 0.7);
-    margin-right: 4%;
+  --background: rgba(13, 116, 218, 0.151);
+  --color: rgba(104, 104, 105, 0.7);
+  margin-right: 4%;
+}
+
+:root {
+  --ion-color-primary: #3880ff;
+  --ion-background-color: #ffffff;
+}
+
+/* Tema por defecto */
+:root[data-theme='default'] {
+  --ion-background-color: #ffffff;
+  --ion-text-color: #222;
+}
+
+/* SPRING */
+[data-theme='spring'] {
+  --ion-background-color: #f7f4ff;
+  --ion-text-color: #4b3c6e;
+  --ion-color-primary: #8e7dff;
+  --ion-color-primary-contrast: #ffffff;
+}
+
+/* SUMMER */
+[data-theme='summer'] {
+  --ion-background-color: #fffbe6;
+  --ion-text-color: #614c00;
+  --ion-color-primary: #ffcc00;
+  --ion-color-primary-contrast: #000000;
+}
+
+/* AUTUMN */
+[data-theme='autumn'] {
+  --ion-background-color: #fff3e0;
+  --ion-text-color: #5d3311;
+  --ion-color-primary: #e27a2d;
+  --ion-color-primary-contrast: #ffffff;
+}
+
+/* WINTER */
+[data-theme='winter'] {
+  --ion-background-color: #e8f3ff;
+  --ion-text-color: #0e2a47;
+  --ion-color-primary: #4da3ff;
+  --ion-color-primary-contrast: #ffffff;
 }

@@ -1,6 +1,6 @@
 <ion-header class="modal-header">
-  <ion-toolbar  class="headerProfile">
-    <ion-title>Perfil</ion-title>    
+  <ion-toolbar class="headerProfile">
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -31,7 +31,14 @@
         <p>Total de Tareas</p>
       </ion-col>
     </ion-row>
-  </ion-grid>  
+  </ion-grid>
+  <ion-item lines="none">
+    <ion-label>Usar tema de temporada</ion-label>
+    <ion-toggle [checked]="firebaseConfig.useSeasonTheme() "
+      (ionChange)="firebaseConfig.useSeasonTheme.set($event.detail.checked)"
+      (ionChange)="toggleTheme($event)">
+    </ion-toggle>
+  </ion-item>
   <!-- Sección adicional -->
   <ion-card>
     <ion-card-header>

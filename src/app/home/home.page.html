@@ -53,7 +53,8 @@
 
     <!-- FAB agregar task -->
     <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="openAddTaskModal()">
-        <ion-fab-button class="pulse">
+        <ion-fab-button class="pulse"
+            [class.frozen]="configService.seasonTheme() === 'winter' && configService.useSeasonTheme()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
@@ -86,27 +87,27 @@
                 <ion-item slot="header">
                     <ion-label>Tareas completadas</ion-label>
                 </ion-item>
-
                 <div class="section-content" slot="content">
-
                     @if (completedTasks().length === 0) {
                     <p class="empty-message">No hay tareas completadas aún.</p>
                     } @else {
-
                     <ion-button class="btn-delete-cTask" color="danger" fill="clear" size="small"
                         (click)="clearCompleted()">
                         <ion-icon name="trash" slot="start"></ion-icon>
                         Eliminar todas las completadas
                     </ion-button>
-
                     @for (task of completedTasks(); track task.id) {
                     <app-task-card [task]="task" (complete)="updateTask($event)">
                     </app-task-card>
                     }
                     }
                 </div>
-
             </ion-accordion>
+            @if (configService.seasonTheme() === 'winter' && configService.useSeasonTheme()) {
+            <div class="christmas-gif-container">
+                <img src="assets/santaGif.gif" alt="Christmas" class="christmas-gif" />
+            </div>
+            }
 
         </ion-accordion-group>
     </div>
