@@ -45,7 +45,7 @@ export class CategoryManagerModalComponent {
       return
     } else {
       if (this.editingId) {
-        console.log('entra aquii')
+        
         this.categoryService.updateCategory(this.editingId, this.newName);
 
       } else {

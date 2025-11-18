@@ -61,7 +61,6 @@ export class AddTaskModalComponent implements OnInit {
     });
 
     modal.onDidDismiss().then(res => {
-      console.log(res.data, "data")
       if (res.data) {
         this.categoryId = res.data.id;
         this.selectedCategoryName = res.data.name;
