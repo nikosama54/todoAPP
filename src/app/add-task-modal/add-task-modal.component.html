@@ -18,13 +18,12 @@
         [(ngModel)]="description" [counter]="true" maxlength="122"></ion-textarea>
     </div>
     <div class="inputs-containers">
-      <ion-select justify="start" [(ngModel)]="categoryId" placeholder="Categoria" label="Selecciona una" interface="modal">
-        @for(c of categories;track c.id ){
-        <ion-select-option [value]="c.name">
-          {{ c.name }}
-        </ion-select-option>
-        }
-      </ion-select>
+      <ion-item button (click)="openCategoryManager()">
+        <ion-label>Categoría</ion-label>
+        <ion-button size="small" shape="round" class="category-btn" slot="end">
+          {{ selectedCategoryName || 'Seleccionar...' }}
+        </ion-button>
+      </ion-item>
       @if (task) {
       <div class="containerBtns">
         <ion-button class="sendBtn" shape="round" size="large" (click)="saveTask()">

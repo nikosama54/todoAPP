@@ -2,22 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import {
   IonHeader, IonToolbar, IonTitle, IonButton, IonContent,
   ToastController, IonIcon,
-  IonItem, IonLabel, IonInput, IonTextarea,
-  IonList, IonSelect, IonSelectOption, IonButtons
+  IonLabel, IonInput, IonTextarea,
+  IonSelect, IonSelectOption, IonButtons,
+  IonNote,
+  IonItem
 } from '@ionic/angular/standalone';
 import { ModalController } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { closeOutline,sendOutline,saveOutline } from 'ionicons/icons';
+import { closeOutline, sendOutline, saveOutline } from 'ionicons/icons';
+import { CategoriService } from '../services/categori.service';
+import { CategoryManagerModalComponent } from '../category-manager-modal/category-manager-modal.component';
+import { Task } from '../models/task.model';
 
-export interface Task {
-  id: number;
-  name: string;
-  description: string;
-  categoryId: number;
-  completed: boolean;
-}
+
 @Component({
   selector: 'app-add-task-modal',
   templateUrl: './add-task-modal.component.html',
@@ -26,7 +25,7 @@ export interface Task {
     IonTitle, IonButton, IonContent,
     FormsModule, CommonModule, IonIcon,
     IonInput, IonTextarea,
-    IonSelect, IonSelectOption]
+    IonLabel,IonItem]
 })
 export class AddTaskModalComponent implements OnInit {
   @Input() task: Task | null = null;
@@ -34,24 +33,43 @@ export class AddTaskModalComponent implements OnInit {
   name = '';
   description = '';
   categoryId: number | null = null;
-
-  categories = [
-    { id: 1, name: 'Todas' },
-    { id: 2, name: 'Personal' },
-    { id: 3, name: 'Medicina' },
-    { id: 4, name: 'Trabajo' }
-  ];
-  constructor(private modalCtrl: ModalController, private toastController: ToastController) {
-    addIcons({ closeOutline,sendOutline,saveOutline });
+  categoryName:string=''
+  selectedCategoryName = '';
+  
+  constructor(private modalCtrl: ModalController, 
+    private toastController: ToastController,
+    private categoryService:CategoriService) {
+    addIcons({ closeOutline, sendOutline, saveOutline });
   }
   ngOnInit() {
     if (this.task) {
       this.name = this.task.name;
       this.description = this.task.description;
       this.categoryId = this.task.categoryId;
+      this.categoryName= this.task.categoryName
+
+      const c = this.categoryService.categories()
+        .find(x => x.id === this.categoryId);
+
+      this.selectedCategoryName = c?.name || '';
     }
   }
+  
+  async openCategoryManager() {
+    const modal = await this.modalCtrl.create({
+      component: CategoryManagerModalComponent,
+    });
 
+    modal.onDidDismiss().then(res => {
+      if (res.data) {
+        this.categoryId = res.data.id;
+        this.selectedCategoryName = res.data.name;
+        this.categoryName=res.data.name
+      }
+    });
+
+    await modal.present();
+  }
   async saveTask() {
     if (!this.name.trim()) {
       const toast = await this.toastController.create({
@@ -68,6 +86,7 @@ export class AddTaskModalComponent implements OnInit {
       name: this.name,
       description: this.description,
       categoryId: this.categoryId ?? "Sin Categoria",
+      categoryName:this.categoryName,
       id: this.task?.id ?? Date.now()
     };
 
@@ -76,6 +95,6 @@ export class AddTaskModalComponent implements OnInit {
 
   close() {
     this.modalCtrl.dismiss(null);
-  }
+  }  
 
 }

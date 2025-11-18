@@ -1,32 +1,56 @@
-import { Injectable, signal, computed } from '@angular/core';
-
-export interface Task {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import { Injectable, signal, computed, WritableSignal } from '@angular/core';
+import { Task } from '../models/task.model';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
 
-  private tasks = signal<Task[]>([
-    { id: 1, title: 'Comprar café', description: 'Café molido', completed: false },
-    { id: 2, title: 'Pagar internet', description: 'Claro Hogar', completed: false }
+  private _tasks: WritableSignal<Task[]> = signal([
+    { id: 1, name: 'Comprar café', description: 'Café molido', completed: false, categoryId: 1, categoryName:"Personal" },
+    { id: 2, name: 'Pagar internet', description: 'Claro Hogar', completed: false, categoryId: 2, categoryName:"Medicina" },
+    { id: 3, name: 'Terminar ajustes en angular', description: 'modal buscar', completed: false, categoryId: 3, categoryName:"Trabajo" }
   ]);
 
-  // Computados
-  pendingTasks = computed(() => this.tasks().filter(t => !t.completed));
-  completedTasks = computed(() => this.tasks().filter(t => t.completed));
+  // -------------------------------------
+  // GETTERS
+  // -------------------------------------
+
+  tasks = computed(() => this._tasks());
+
+  pendingTasks = computed(() =>
+    this._tasks().filter(t => !t.completed)
+  );
+
+  completedTasks = computed(() =>
+    this._tasks().filter(t => t.completed)
+  );
+
+  // -------------------------------------
+  // CRUD
+  // -------------------------------------
+
+  addTask(task: Task) {
+    this._tasks.update(list => [...list, task]);
+  }
+
+  update(task: Task) {
+    this._tasks.update(list =>
+      list.map(t => (t.id === task.id ? task : t))
+    );
+  }
+
+  delete(id: number) {
+    this._tasks.update(list => list.filter(t => t.id !== id));
+  }
 
   toggleCompleted(id: number) {
-    this.tasks.update(list =>
-      list.map(t => t.id === id ? { ...t, completed: !t.completed } : t)
+    this._tasks.update(list =>
+      list.map(t =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      )
     );
   }
 
   clearCompleted() {
-    this.tasks.update(list => list.filter(t => !t.completed));
+    this._tasks.update(list => list.filter(t => !t.completed));
   }
 }
-
