@@ -79,7 +79,6 @@ export class AddTaskModalComponent implements OnInit {
       });
 
       await toast.present();
-      console.log('ingrese nombre porfavor')
       return
     };
     const payload = {

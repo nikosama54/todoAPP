@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { TasksService } from './tasks.service';
 export interface Category {
   id: number;
   name: string;
@@ -12,7 +13,7 @@ export class CategoriService {
     { id: 2, name: "Medicina" },
     { id: 3, name: "Trabajo" }
   ]);
-
+  constructor(private taskService: TasksService){}
   addCategory(name: string) {
     const newCategory = { id: Date.now(), name };
     this.categories.update(list => [...list, newCategory]);
@@ -25,6 +26,8 @@ export class CategoriService {
   }
 
   deleteCategory(id: number) {
-    this.categories.update(list => list.filter(c => c.id !== id));
-  }
+  this.categories.update(list => list.filter(c => c.id !== id));
+
+  this.taskService.removeCategoryFromTasks(id);
+}
 }

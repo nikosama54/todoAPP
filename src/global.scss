@@ -53,3 +53,9 @@ body.dark {
 h1, h2, h3, h4 {
   font-family: 'Montserrat', sans-serif;
 }
+
+.closeBtn {
+    --background: rgba(13, 116, 218, 0.151);
+    --color: rgba(104, 104, 105, 0.7);
+    margin-right: 4%;
+}

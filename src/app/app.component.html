@@ -1,12 +1,10 @@
 <ion-app>
-  <ion-content class="ion-padding">
+  <ion-content>
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
   @if (configServer.showBottomMenu()) {
   <ion-footer>
-
-
-    <ion-tab-bar slot="bottom">
+    <ion-tab-bar slot="bottom" style="margin-bottom: 15px;">
       <ion-tab-button (click)="goTo('/home')" [class.active-btn]="currentUrl() === '/home'">
         <ion-icon name="library"></ion-icon>
         Tareas

@@ -1,7 +1,7 @@
 <ion-header class="modal-header">
   <ion-toolbar>
     <ion-title>Categorias</ion-title>
-    <ion-button class="closeBt" slot="end" size="small" (click)="close()" shape="round">
+    <ion-button class="closeBtn" slot="end" size="small" (click)="close()" shape="round">
       <ion-icon slot="icon-only" name="close-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -9,14 +9,14 @@
 <ion-content class="modal-content">
   <ion-list>
     @for (category of categoryService.categories(); track category.id) {
-    <ion-item button (click)="selectCategory(category)">
+    <ion-item [disabled]="editingId" button (click)="selectCategory(category)">
       <ion-label>{{ category.name }}</ion-label>
 
       <ion-button fill="clear" slot="end" (click)="startEdit(category); $event.stopPropagation();">
         <ion-icon name="pencil-outline" size="large" color="secondary"></ion-icon>
       </ion-button>
 
-      <ion-button fill="clear" class="deleteIcon"  slot="end" (click)="delete(category.id); $event.stopPropagation();">
+      <ion-button [disabled]="editingId" fill="clear" class="deleteIcon"  slot="end" (click)="delete(category.id); $event.stopPropagation();">
         <ion-icon  name="trash" size="large"></ion-icon>
       </ion-button>
     </ion-item>
