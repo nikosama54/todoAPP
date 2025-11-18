@@ -10,6 +10,7 @@ import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task.model';
 import { CategoriService } from '../services/categori.service';
 import { CategoryManagerModalComponent } from '../category-manager-modal/category-manager-modal.component';
+import { FirebaseConfigService } from '../services/remote-config.service';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,8 @@ export class HomePage {
   constructor(
     private modalCtrl: ModalController,
     private taskService: TasksService,
-    categoriService: CategoriService
+    categoriService: CategoriService,
+    public configService: FirebaseConfigService
   ) {
     addIcons({ menu, ellipsisVerticalOutline, add, trash });
 

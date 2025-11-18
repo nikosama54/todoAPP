@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { register } from 'swiper/element/bundle';
 import { menu,ellipsisVerticalOutline,library,search } from 'ionicons/icons';
+import { FirebaseConfigService } from './services/remote-config.service';
 register();
 
 document.body.classList.remove('dark');
@@ -14,7 +15,7 @@ document.body.classList.remove('dark');
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(public configServer: FirebaseConfigService) {
     addIcons({ menu,ellipsisVerticalOutline,library,search });    
   } 
 
