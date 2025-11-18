@@ -21,7 +21,7 @@
       <ion-item button (click)="openCategoryManager()">
         <ion-label>Categoría</ion-label>
         <ion-button size="small" shape="round" class="category-btn" slot="end">
-          {{ selectedCategoryName || 'Seleccionar...' }}
+          {{ categoryName || 'Seleccionar...' }}
         </ion-button>
       </ion-item>
       @if (task) {

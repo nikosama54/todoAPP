@@ -15,7 +15,7 @@ export class TaskCardComponent {
   @Input() task!: Task;
   @Output() edit = new EventEmitter<Task>();
   @Output() complete = new EventEmitter<Task>();
-
+  
   // Signal que contendrá el nombre actual de la categoría
   categoryName: string = 'Sin categoría';
 

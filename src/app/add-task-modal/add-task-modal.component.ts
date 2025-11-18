@@ -50,13 +50,8 @@ export class AddTaskModalComponent implements OnInit {
     if (this.task) {
       this.name = this.task.name;
       this.description = this.task.description;
-      this.categoryId = this.task.categoryId;
-      this.categoryName = this.task.categoryName ?? '';
-
-      const c = this.categoryService.categories()
-        .find(x => x.id === this.categoryId);
-
-      this.selectedCategoryName = c?.name || '';
+      this.categoryId = this.task.categoryId; 
+      this.selectedCategoryName = this.categoryName
     }
   }
 
@@ -73,7 +68,7 @@ export class AddTaskModalComponent implements OnInit {
         this.categoryName = res.data.name
       } else {
         if (this.task) {
-          this.selectedCategoryName = this.categoryName ?? '';
+          this.selectedCategoryName = this.categoryName
 
         }
       }
@@ -82,15 +77,13 @@ export class AddTaskModalComponent implements OnInit {
 
     await modal.present();
   }
-  async saveTask() {
-    console.log(this.name, "nameee")
+  async saveTask() {    
     if (!this.name.trim()) {
       const toast = await this.toastController.create({
         message: 'Porfavor ingrese un nombre para la tarea',
         duration: 2000,
         position: 'top',
       });
-
       await toast.present();
       return
     };
@@ -101,12 +94,13 @@ export class AddTaskModalComponent implements OnInit {
       categoryName: this.categoryName,
       id: this.task?.id ?? Date.now()
     };
-
     this.modalCtrl.dismiss(payload);
   }
 
   close() {
-    this.modalCtrl.dismiss(null);
+    
+    this.modalCtrl.dismiss();
+    
   }
 
 }

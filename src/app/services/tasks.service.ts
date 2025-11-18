@@ -8,8 +8,8 @@ export class TasksService {
   completedTaskStates = new Map<number, boolean>();
 
   _tasks: WritableSignal<Task[]> = signal([
-    { id: 1, name: 'Comprar café', description: 'Café molido', completed: false, categoryId: 1, categoryName: "Personal"},
-    { id: 2, name: 'Pagar internet', description: 'Claro Hogar', completed: false, categoryId: 2, categoryName: "Medicina"},
+    { id: 1, name: 'Comprar café', description: 'Café molido', completed: false, categoryId: 1, categoryName: "Personal" },
+    { id: 2, name: 'Pagar internet', description: 'Claro Hogar', completed: false, categoryId: 2, categoryName: "Medicina" },
     { id: 3, name: 'Terminar ajustes en angular', description: 'modal buscar', completed: false, categoryId: 3, categoryName: "Trabajo" }
   ]);
 
@@ -34,12 +34,23 @@ export class TasksService {
   addTask(task: Task) {
     this._tasks.update(list => [...list, task]);
   }
-
+  updateTasksCategory(categoryId: number, newName: string) {
+    this._tasks.update(list =>
+      list.map(t =>
+        t.categoryId === categoryId ? { ...t, categoryName: newName } : t
+      )
+    );
+  }
   update(task: Task) {
     this._tasks.update(list =>
-      list.map(t => (t.id === task.id ? task : t))
+      list.map(t => t.id === task.id ? { ...task } : t)
     );
+
     this.toggleComplete(task);
+  }
+
+  taskSignal(id: number) {
+    return computed(() => this._tasks().find(t => t.id === id)!);
   }
 
   delete(id: number) {

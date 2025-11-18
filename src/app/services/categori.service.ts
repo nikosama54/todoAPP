@@ -20,10 +20,11 @@ export class CategoriService {
   }
 
   updateCategory(id: number, name: string) {
-    
+
     this.categories.update(list =>
       list.map(c => (c.id === id ? { ...c, name } : c))
-    );   
+    );
+    this.taskService.updateTasksCategory(id, name);
 
   }
 
