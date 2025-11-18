@@ -4,19 +4,21 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { menu, ellipsisVerticalOutline, add, trash } from 'ionicons/icons';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { addIcons } from 'ionicons';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/standalone';
 import { AddTaskModalComponent } from '../add-task-modal/add-task-modal.component';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task.model';
 import { CategoriService } from '../services/categori.service';
 import { CategoryManagerModalComponent } from '../category-manager-modal/category-manager-modal.component';
+import { IonButton, IonContent, IonPopover,IonList,IonItem,IonFab,IonIcon,IonAccordionGroup,IonAccordion,
+  IonLabel,IonFabButton} from '@ionic/angular/standalone';
 import { FirebaseConfigService } from '../services/remote-config.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonicModule, TaskCardComponent],
+  imports: [TaskCardComponent,IonButton, IonContent,IonPopover,IonList,IonItem,IonFab,IonIcon,IonAccordionGroup,IonAccordion,IonLabel,IonFabButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {
